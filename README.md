@@ -1,4 +1,4 @@
-# TranscoR Platform
+# TranscoR Student Platform
 
 ## Development quickstart
 
