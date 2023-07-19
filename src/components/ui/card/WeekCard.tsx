@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -9,66 +8,6 @@ import Image from "next/image";
 import IconArrow from "@/assets/icons/chevron.svg";
 import DayCard from "@/components/ui/card/DayCard";
 import { type Student } from "@/types";
-
-const Card = styled(Accordion)`
-  border: 1px solid #d1d1d185 !important;
-  margin-bottom: 12px;
-  margin-top: 12px;
-  border-radius: 20px;
-  padding: 0 15px;
-  @media screen and (max-width: 820px) {
-    padding: 0;
-  }
-`;
-
-const Section = styled(Box)`
-  margin-bottom: 20px;
-  & h3 {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 5px;
-  }
-  & p {
-    font-size: 12.5px;
-  }
-  & ul {
-    padding-left: 5px;
-    /* margin: 0; */
-    list-style: none;
-    & li {
-      &:not(:last-child) {
-        margin-bottom: 10px;
-      }
-    }
-  }
-`;
-
-const Date = styled(Typography)`
-  font-size: 12px !important;
-  color: grey;
-`;
-
-const ContentBadges = styled(Box)`
-  margin-bottom: 20px;
-`;
-
-const ContentIconMedicine = styled(Box)`
-  background-color: #97feed31;
-  padding: 9px;
-  border-radius: 6px;
-  & img {
-    display: block;
-  }
-`;
-
-const Badge = styled.p`
-  font-size: 12px !important;
-  padding: 5px 10px;
-  background: #fbd85d1c;
-  border-radius: 50px;
-  color: #1d1d1da6;
-  border: 1px solid #fbd85d;
-`;
 
 const HeaderInfo = styled(Box)`
   display: grid;
@@ -114,6 +53,22 @@ const CotentDays = styled(Box)`
     overflow: scroll;
   }
 `;
+
+const CustomAccordion = styled(Accordion)(({ theme }) => {
+  return {
+    borderRadius: "7px !important",
+    margin: "12px 0 !important",
+    boxShadow: "none",
+    border: "1px solid #d1d1d185",
+    ".MuiAccordionDetails-root": {},
+    ".MuiAccordionSummary-root": {
+      "& .Mui-expanded": {
+        margin: "0px !important",
+      },
+    },
+  };
+});
+
 interface Paid {
   paid: boolean;
 }
@@ -142,7 +97,7 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
 
   return (
     <Box sx={{ border: "1ps solid #d1d1d185" }}>
-      <Card>
+      <CustomAccordion>
         <AccordionSummary
           expandIcon={
             <Image
@@ -153,8 +108,8 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
               alt="icon-arrow"
             />
           }
-          aria-controls="panel1a-content"
-          id="panel1a-header"
+          aria-controls="week-accordion-content"
+          id="week-accordion-header"
           sx={{ padding: "0 20px !important" }}
         >
           <HeaderInfo>
@@ -204,7 +159,7 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
             </small>
           </Box>
         </AccordionDetails>
-      </Card>
+      </CustomAccordion>
     </Box>
   );
 };

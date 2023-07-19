@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import styled from "styled-components";
 import Header from "@/layouts/header";
 import Stack from "@mui/material/Stack";
@@ -74,15 +74,13 @@ const Index = () => {
   const date = new Date();
   const current_year = date.getFullYear();
 
-  const current_school_cycle = user?.school_cycle
-    ? {
-        first_year: JSON.stringify(current_year),
-        end_year: JSON.stringify(current_year + 1),
-      }
-    : {};
+  const current_school_cycle = {
+    first_year: JSON.stringify(current_year),
+    end_year: JSON.stringify(current_year + 1),
+  };
 
   const [cycleSelected, setCycleSelected] = useState<cycleSelected | {}>(
-    current_school_cycle
+    current_school_cycle || {}
   );
 
   const cyclesFiltered =
@@ -115,35 +113,33 @@ const Index = () => {
                 </ContentIcon>
               </Box>
               <Box>
-                {!!Object.keys(cycleSelected).length &&
-                  !!user?.school_cycle.length && (
-                    <SchoolCycle>
-                      {/* @ts-ignore */}
-                      Ciclo escolar: {cycleSelected?.first_year} -{" "}
-                      {/* @ts-ignore */}
-                      {cycleSelected?.end_year}
-                    </SchoolCycle>
-                  )}
+                {!!user?.school_cycle?.length && (
+                  <SchoolCycle>
+                    {/* @ts-ignore */}
+                    Ciclo escolar: {cycleSelected?.first_year} -{" "}
+                    {/* @ts-ignore */}
+                    {cycleSelected?.end_year}
+                  </SchoolCycle>
+                )}
                 <Student>{user?.student_name}</Student>
                 {!user?.active_account && <DisabledAccountBadge />}
               </Box>
             </Stack>
           </Box>
-          {!!Object.keys(cycleSelected).length &&
-            !!user?.school_cycle.length && (
-              <Box>
-                <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
-                  <Image
-                    width={15}
-                    height={15}
-                    priority
-                    src={IconCalendar}
-                    alt="icon-calendar"
-                  />
-                  Ciclo escolar
-                </ButtonFilters>
-              </Box>
-            )}
+          {!!user?.school_cycle?.length && (
+            <Box>
+              <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
+                <Image
+                  width={15}
+                  height={15}
+                  priority
+                  src={IconCalendar}
+                  alt="icon-calendar"
+                />
+                Ciclo escolar
+              </ButtonFilters>
+            </Box>
+          )}
         </Stack>
         {showFilters && (
           <Animation>
@@ -187,20 +183,28 @@ const Index = () => {
               ))}
           </Box>
         ) : (
-          <Box mt={10} textAlign="center">
-            <Image
-              width={200}
-              height={200}
-              priority
-              src={IconAdminSchoolCycle}
-              alt="icon-admin-school-cycle"
-              style={{ marginBottom: "20px" }}
-            />
-            <p>
-              Espere al administrador a que cree el nuevo ciclo escolar de este
-              año
-            </p>
-          </Box>
+          <Fragment>
+            {!!user?.school_cycle?.length ? (
+              <Box mt={10} textAlign="center">
+                <p>Selecciona un ciclo escolar</p>
+              </Box>
+            ) : (
+              <Box mt={10} textAlign="center">
+                <Image
+                  width={200}
+                  height={200}
+                  priority
+                  src={IconAdminSchoolCycle}
+                  alt="icon-admin-school-cycle"
+                  style={{ marginBottom: "20px" }}
+                />
+                <p>
+                  Espere al administrador a que cree el nuevo ciclo escolar de
+                  este año
+                </p>
+              </Box>
+            )}
+          </Fragment>
         )}
       </Content>
     </Box>
