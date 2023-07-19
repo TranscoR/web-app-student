@@ -57,6 +57,13 @@ const ButtonFilters = styled.button`
   }
 `;
 
+const FilterOptions = styled(Box)`
+  @media screen and (max-width: 820px) {
+    position: relative;
+    overflow: scroll;
+  }
+`;
+
 interface cycleSelected {
   first_year: string;
   end_year: string;
@@ -143,9 +150,9 @@ const Index = () => {
         </Stack>
         {showFilters && (
           <Animation>
-            <Box mb={4} mt={4}>
+            <FilterOptions mb={4} mt={4}>
               <Stack
-                direction={{ xs: "column", sm: "row" }}
+                direction={{ xs: "row", sm: "row" }}
                 spacing={2}
                 alignItems="center"
               >
@@ -155,8 +162,7 @@ const Index = () => {
                     sx={{
                       fontFamily: "Prompt",
                       boxShadow: "none",
-                      marginRight: "10px",
-                      padding: "8px 30px",
+                      padding: "8px 10px",
                       backgroundColor: "#e9edf3",
                     }}
                     onClick={() =>
@@ -170,7 +176,7 @@ const Index = () => {
                   </Button>
                 ))}
               </Stack>
-            </Box>
+            </FilterOptions>
           </Animation>
         )}
         {cyclesFiltered && cyclesFiltered.length && cyclesFiltered[0].weeks ? (
