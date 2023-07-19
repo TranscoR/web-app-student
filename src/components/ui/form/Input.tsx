@@ -20,7 +20,7 @@ interface InputProps {
 
 const Input = styled(TextField)(({}) => ({
   "& .MuiInputBase-input": {
-    fontSize: "13px",
+    fontSize: "14px",
     padding: "16px",
     fontFamily: "Prompt",
   },

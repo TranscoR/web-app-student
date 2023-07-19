@@ -1,13 +1,10 @@
-import Link from "next/link";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Input from "@/components/ui/form/Input";
-import Checkbox from "@mui/material/Checkbox";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { updateUserInfo } from "@/api/user";
 import { Field } from "@/styles";
@@ -16,8 +13,12 @@ import { useUserStore } from "@/store";
 import { Toaster, toast } from "sonner";
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 27px;
+  font-weight: 500;
   margin-bottom: 20px;
+  @media screen and (max-width: 820px) {
+    font-size: 24.5px;
+  }
 `;
 
 const Index = () => {
@@ -385,16 +386,8 @@ const Index = () => {
             </Field>
           </Stack>
         </Box>
-        <Box mt={2}>
-          <Field>
-            <Checkbox checked={true} />
-            <label style={{ fontWeight: "400" }}>
-              Estoy de acuerdo con lo establecido y con términos y condiciones
-            </label>
-          </Field>
-        </Box>
         <LoadingButton
-          sx={{ margin: "20px 0 0px", color: "#fff", boxShadow: "none" }}
+          sx={{ margin: "40px 0 0px", color: "#fff", boxShadow: "none" }}
           size="medium"
           color="primary"
           type="submit"

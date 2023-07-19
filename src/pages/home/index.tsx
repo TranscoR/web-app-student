@@ -7,17 +7,18 @@ import Button from "@mui/material/Button";
 import Animation from "@/components/animation/Animation";
 import Image from "next/image";
 import IconCalendar from "@/assets/icons/calendar.svg";
+import IconUser from "@/assets/icons/user.svg";
+import IconAdminSchoolCycle from "@/assets/icons/admin-school-cycle.svg";
 import Table from "@/components/ui/table";
 import DisabledAccountBadge from "@/components/DisabledAccountBadge";
 import WeekCard from "@/components/ui/card/WeekCard";
-import { currentSchoolCycle } from "@/services/utils/currentSchoolCycle";
 import { useUserStore } from "@/store";
 
 const Content = styled(Box)`
   margin: 60px auto;
   max-width: 1000px;
   @media screen and (max-width: 820px) {
-    margin: 60px 20px;
+    margin: 40px 20px;
   }
 `;
 
@@ -67,10 +68,19 @@ const Index = () => {
   // Filter By Cycle
   const [showFilters, setShowFilters] = useState<boolean>(false);
 
-  const [cycleSelected, setCycleSelected] = useState<cycleSelected>({
-    first_year: "2023",
-    end_year: "2024",
-  });
+  const date = new Date();
+  const current_year = date.getFullYear();
+
+  const current_school_cycle = user?.school_cycle
+    ? {
+        first_year: JSON.stringify(current_year),
+        end_year: JSON.stringify(current_year + 1),
+      }
+    : {};
+
+  const [cycleSelected, setCycleSelected] = useState<cycleSelected | {}>(
+    current_school_cycle
+  );
 
   const cyclesFiltered =
     Object.keys(cycleSelected).length &&
@@ -96,33 +106,39 @@ const Index = () => {
                     width={25}
                     height={25}
                     priority
-                    src={IconCalendar}
-                    alt="icon-calendar"
+                    src={IconUser}
+                    alt="icon-user"
                   />
                 </ContentIcon>
               </Box>
               <Box>
-                <SchoolCycle>
-                  Ciclo escolar: {cycleSelected.first_year} -{" "}
-                  {cycleSelected.end_year}
-                </SchoolCycle>
-                <Student>Alumno: {user?.student_name}</Student>
+                {!!Object.keys(cycleSelected).length && (
+                  <SchoolCycle>
+                    {/* @ts-ignore */}
+                    Ciclo escolar: {cycleSelected?.first_year} -{" "}
+                    {/* @ts-ignore */}
+                    {cycleSelected?.end_year}
+                  </SchoolCycle>
+                )}
+                <Student>{user?.student_name}</Student>
                 {!user?.active_account && <DisabledAccountBadge />}
               </Box>
             </Stack>
           </Box>
-          <Box>
-            <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
-              <Image
-                width={15}
-                height={15}
-                priority
-                src={IconCalendar}
-                alt="icon-calendar"
-              />
-              Ciclo escolar
-            </ButtonFilters>
-          </Box>
+          {!!Object.keys(cycleSelected).length && (
+            <Box>
+              <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
+                <Image
+                  width={15}
+                  height={15}
+                  priority
+                  src={IconCalendar}
+                  alt="icon-calendar"
+                />
+                Ciclo escolar
+              </ButtonFilters>
+            </Box>
+          )}
         </Stack>
         {showFilters && (
           <Animation>
@@ -156,14 +172,31 @@ const Index = () => {
             </Box>
           </Animation>
         )}
-        <Box>
-          <Table thead={thead} />
-          {cyclesFiltered &&
-            cyclesFiltered.length &&
-            cyclesFiltered[0].weeks?.map((week: any, i: any) => (
-              <WeekCard {...week} i={i} />
-            ))}
-        </Box>
+        {cyclesFiltered && cyclesFiltered.length && cyclesFiltered[0].weeks ? (
+          <Box>
+            <Table thead={thead} />
+            {cyclesFiltered &&
+              cyclesFiltered.length &&
+              cyclesFiltered[0].weeks?.map((week: any, i: any) => (
+                <WeekCard {...week} i={i} />
+              ))}
+          </Box>
+        ) : (
+          <Box mt={10} textAlign="center">
+            <Image
+              width={200}
+              height={200}
+              priority
+              src={IconAdminSchoolCycle}
+              alt="icon-admin-school-cycle"
+              style={{ marginBottom: "20px" }}
+            />
+            <p>
+              Espere al administrador a que cree el nuevo ciclo escolar de este
+              año
+            </p>
+          </Box>
+        )}
       </Content>
     </Box>
   );

@@ -339,11 +339,19 @@ const Index = () => {
         </Box>
         <Box mt={2}>
           <Field>
-            <Checkbox checked={true} />
-            <label style={{ fontWeight: "400" }}>
-              Estoy de acuerdo con lo establecido y con{" "}
-              <Link href="/terms-and-conditions">Términos y condiciones</Link>
-            </label>
+            <Stack direction="row" spacing={0} alignItems="center">
+              <Box>
+                <Checkbox checked={true} />
+              </Box>
+              <Box>
+                <label style={{ fontWeight: "400" }}>
+                  Estoy de acuerdo con lo establecido y con{" "}
+                  <Link href="/terms-and-conditions">
+                    Términos y condiciones
+                  </Link>
+                </label>
+              </Box>
+            </Stack>
           </Field>
         </Box>
         <LoadingButton

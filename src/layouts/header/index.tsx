@@ -15,6 +15,9 @@ const Header = styled.header`
   backdrop-filter: blur(5px);
   box-shadow: rgba(0, 0, 0, 0.04) 0px 0px 25px -2px,
     rgba(0, 0, 0, 0) 0px 8px 0px -2px;
+  @media screen and (max-width: 820px) {
+    padding: 15px 20px;
+  }
 `;
 
 const Index = () => {
@@ -52,7 +55,7 @@ const Index = () => {
             variant="contained"
             sx={{ color: "#fff", fontFamily: "Prompt", boxShadow: "none" }}
           >
-            Ver perfil
+            Perfil
           </Button>
         </Link>
       </Box>
