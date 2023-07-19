@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { COLORS } from "../constants/colors";
 
 export default createGlobalStyle`
 
@@ -80,5 +79,9 @@ export default createGlobalStyle`
     }
     .css-1egur5x-MuiPaper-root-MuiAccordion-root {
       box-shadow: none !important;
+    }
+    .css-b7v0nw.css-b7v0nw.css-b7v0nw {
+      font-family: 'Prompt';
+      text-transform: capitalize;
     }
 `;

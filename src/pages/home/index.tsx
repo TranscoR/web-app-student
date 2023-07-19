@@ -150,33 +150,45 @@ const Index = () => {
         </Stack>
         {showFilters && (
           <Animation>
-            <FilterOptions mb={4} mt={4}>
-              <Stack
-                direction={{ xs: "row", sm: "row" }}
-                spacing={2}
-                alignItems="center"
-              >
-                {user?.school_cycle?.map((cycle: any) => (
-                  <Button
-                    variant="contained"
-                    sx={{
-                      fontFamily: "Prompt",
-                      boxShadow: "none",
-                      padding: "8px 10px",
-                      backgroundColor: "#e9edf3",
-                    }}
-                    onClick={() =>
-                      setCycleSelected({
-                        first_year: cycle.first_year,
-                        end_year: cycle.end_year,
-                      })
-                    }
-                  >
-                    {cycle.first_year} - {cycle.end_year}
-                  </Button>
-                ))}
-              </Stack>
-            </FilterOptions>
+            <Box mt={4}>
+              <small>Elige un ciclo escolar:</small>
+              <FilterOptions mb={4} mt={1}>
+                <Stack
+                  direction={{ xs: "row", sm: "row" }}
+                  spacing={2}
+                  alignItems="center"
+                >
+                  {user?.school_cycle?.map((cycle: any) => (
+                    <Button
+                      variant="contained"
+                      sx={{
+                        fontFamily: "Prompt",
+                        boxShadow: "none",
+                        padding: "8px 10px",
+                        color:
+                          //@ts-ignore
+                          cycleSelected?.first_year === cycle.first_year
+                            ? "#f1ca3b"
+                            : "#1d1d1d",
+                        backgroundColor:
+                          //@ts-ignore
+                          cycleSelected?.first_year === cycle.first_year
+                            ? "#f1ca3b20"
+                            : "#e9edf3",
+                      }}
+                      onClick={() =>
+                        setCycleSelected({
+                          first_year: cycle.first_year,
+                          end_year: cycle.end_year,
+                        })
+                      }
+                    >
+                      {cycle.first_year} - {cycle.end_year}
+                    </Button>
+                  ))}
+                </Stack>
+              </FilterOptions>
+            </Box>
           </Animation>
         )}
         {cyclesFiltered && cyclesFiltered.length && cyclesFiltered[0].weeks ? (
