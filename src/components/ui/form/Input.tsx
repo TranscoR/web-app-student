@@ -15,6 +15,7 @@ interface InputProps {
   minLength?: string;
   required?: boolean;
   endAdornment?: any;
+  disabled?: boolean;
 }
 
 const Input = styled(TextField)(({}) => ({
@@ -42,6 +43,7 @@ const Index = (props: InputProps) => {
     placeholder,
     required,
     endAdornment,
+    disabled,
   } = props;
   return (
     <div>
@@ -58,6 +60,7 @@ const Index = (props: InputProps) => {
         value={value}
         type={type}
         placeholder={placeholder}
+        disabled={disabled}
         InputProps={
           endAdornment && {
             endAdornment: (
@@ -67,7 +70,10 @@ const Index = (props: InputProps) => {
         }
       />
       {errors[keyName] && (
-        <Typography variant="caption" sx={{ fontFamily: "Prompt" }}>
+        <Typography
+          variant="caption"
+          sx={{ fontFamily: "Prompt", color: "grey" }}
+        >
           * Este campo es requerido
         </Typography>
       )}

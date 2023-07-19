@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+import { COLORS } from "@/constants/colors";
 
 // Forms
 export const Field = styled(Box)`
@@ -12,5 +12,8 @@ export const Field = styled(Box)`
     font-size: 13px;
     font-weight: 500;
     font-family: "Prompt";
+  }
+  & a {
+    color: ${COLORS.brightYellow};
   }
 `;

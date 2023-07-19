@@ -9,6 +9,9 @@ const Content = styled(Box)`
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: 1fr;
   grid-row-gap: 0px;
+  @media screen and (max-width: 820px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const Title = styled.h1`
@@ -34,13 +37,24 @@ const Description = styled.p`
 `;
 
 const ContentLeft = styled(Box)`
-  /* background-color: #f1c93b0d; */
   background-color: #fff;
   padding: 70px;
+  @media screen and (max-width: 820px) {
+    padding: 40px 20px 20px;
+  }
 `;
 
 const ContentRight = styled(Box)`
-  padding: 70px;
+  padding: 70px 70px 40px;
+  @media screen and (max-width: 820px) {
+    padding: 20px 20px 40px;
+  }
+`;
+
+const Logo = styled.h2`
+  color: #c6c6c6;
+  font-weight: 500;
+  margin-bottom: 24px;
 `;
 
 const Index = () => {
@@ -48,14 +62,15 @@ const Index = () => {
     <Content>
       <ContentLeft>
         <div style={{ position: "sticky", top: "70px" }}>
+          <Logo>TranscoR</Logo>
           <Title>
             Bienvenidos al nuevo
             <span>Cliclo Escolar</span>
           </Title>
           <SchoolYear>{currentSchoolCycle()}</SchoolYear>
           <Description>
-            El servicio mas seguro de transporte escolar para tu hijo, lleva el
-            control de tus pagos
+            El servicio más seguro de transporte escolar para tu hijo, llevar el
+            control de tus pagos ahora es muy fácil
           </Description>
         </div>
       </ContentLeft>

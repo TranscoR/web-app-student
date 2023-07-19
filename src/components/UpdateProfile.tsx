@@ -1,17 +1,19 @@
+import Link from "next/link";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 import styled from "styled-components";
-import Link from "next/link";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import Input from "@/components/ui/form/Input";
 import Checkbox from "@mui/material/Checkbox";
 import LoadingButton from "@mui/lab/LoadingButton";
-import { creatAccount } from "@/api/auth";
+import { updateUserInfo } from "@/api/user";
 import { Field } from "@/styles";
 import { Typography, FormControl, MenuItem, Select } from "@mui/material";
+import { useUserStore } from "@/store";
+import { Toaster, toast } from "sonner";
 
 const Title = styled.h1`
   font-size: 30px;
@@ -21,23 +23,52 @@ const Title = styled.h1`
 const Index = () => {
   const router = useRouter();
 
+  // @ts-ignore
+  const user = useUserStore((state) => state.user);
+  // @ts-ignore
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
+
   const {
     register,
     handleSubmit,
     control,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      student_name: user?.student_name || "",
+      email: user?.email || "",
+      password: user?.password || "",
+      school_name: user?.school_name || "",
+      education: user?.education?.toLowerCase() || "",
+      grade: user?.grade || "",
+      turn: user?.turn?.toLowerCase() || "",
+      tutor_name: user?.tutor_name || "",
+      house_phone_number: user?.house_phone_number || "",
+      phone_number: user?.phone_number || "",
+      subtutor_name: user?.subtutor_name || "",
+      subtutor_phone_number: user?.subtutor_phone_number || "",
+      address: user?.address || "",
+      first_street_reference: user?.first_street_reference || "",
+      second_street_reference: user?.second_street_reference || "",
+      house_color: user?.house_color || "",
+      door_color: user?.door_color || "",
+    },
+  });
 
   const [loading, setLoading] = useState(false);
 
   const onSubmit = (dataForm: any) => {
     setLoading(true);
-    creatAccount(dataForm)
+    const info = {
+      ...dataForm,
+      ...("weeks" in user ? { weeks: [...user?.weeks] } : null),
+    };
+    updateUserInfo(user?.uid, dataForm)
       .then(() => {
         setLoading(false);
-        // setUserInfo(info);
-        router.push("/home");
+        setUserInfo(info);
+        toast.success("Perfil actualizado!");
       })
       .catch((error) => {
         setLoading(false);
@@ -52,7 +83,7 @@ const Index = () => {
 
   return (
     <Box>
-      <Title>Formulario de Registro</Title>
+      <Title>Actualizar perfil</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Field>
           <label>Nombre del Alumno</label>
@@ -63,6 +94,7 @@ const Index = () => {
             keyName="student_name"
             placeholder="Escribe el nombre del alumno"
             required={true}
+            disabled={!user?.active_account}
           />
         </Field>
         <Box mt={2}>
@@ -76,6 +108,7 @@ const Index = () => {
                 keyName="email"
                 placeholder="Ingresa un correo electrónico"
                 required={true}
+                disabled
               />
             </Field>
             <Field>
@@ -87,6 +120,7 @@ const Index = () => {
                 keyName="password"
                 placeholder="Escribe una contraseña"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
           </Stack>
@@ -102,6 +136,7 @@ const Index = () => {
                 keyName="school_name"
                 placeholder="Escribe un nombre"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
             <Field>
@@ -116,6 +151,7 @@ const Index = () => {
                       <Select
                         id="mui-component-select-education"
                         variant="outlined"
+                        disabled={!user?.active_account}
                         {...field}
                       >
                         {["primaria", "secundaria"].map(
@@ -155,6 +191,7 @@ const Index = () => {
                       <Select
                         id="mui-component-select-grade"
                         variant="outlined"
+                        disabled={!user?.active_account}
                         {...field}
                       >
                         {gradeOptions.map((reason: any, k: any) => (
@@ -188,6 +225,7 @@ const Index = () => {
                       <Select
                         id="mui-component-select-turn"
                         variant="outlined"
+                        disabled={!user?.active_account}
                         {...field}
                       >
                         {["matutino", "vespertino"].map(
@@ -222,6 +260,7 @@ const Index = () => {
             keyName="tutor_name"
             placeholder="Escribe el nombre del tutor"
             required={true}
+            disabled={!user?.active_account}
           />
         </Field>
         <Box mt={2}>
@@ -235,6 +274,7 @@ const Index = () => {
                 keyName="house_phone_number"
                 placeholder="Escribe un teléfono"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
             <Field>
@@ -246,6 +286,7 @@ const Index = () => {
                 keyName="phone_number"
                 placeholder="Escribe un numero de celular"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
           </Stack>
@@ -261,6 +302,7 @@ const Index = () => {
                 keyName="subtutor_name"
                 placeholder="Escribe el nombre completo de otro familiar"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
             <Field>
@@ -272,6 +314,7 @@ const Index = () => {
                 keyName="subtutor_phone_number"
                 placeholder="Escribe un teléfono"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
           </Stack>
@@ -285,6 +328,7 @@ const Index = () => {
             keyName="address"
             placeholder="Escribe una dirección"
             required={true}
+            disabled={!user?.active_account}
           />
         </Field>
         <Stack direction="row" spacing={2}>
@@ -297,6 +341,7 @@ const Index = () => {
               keyName="first_street_reference"
               placeholder="Escribe una calle"
               required={true}
+              disabled={!user?.active_account}
             />
           </Field>
           <Field>
@@ -308,6 +353,7 @@ const Index = () => {
               keyName="second_street_reference"
               placeholder="Escribe una calle"
               required={true}
+              disabled={!user?.active_account}
             />
           </Field>
         </Stack>
@@ -322,6 +368,7 @@ const Index = () => {
                 keyName="house_color"
                 placeholder="Escribe un color"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
             <Field>
@@ -333,6 +380,7 @@ const Index = () => {
                 keyName="door_color"
                 placeholder="Escribe un color"
                 required={true}
+                disabled={!user?.active_account}
               />
             </Field>
           </Stack>
@@ -341,8 +389,7 @@ const Index = () => {
           <Field>
             <Checkbox checked={true} />
             <label style={{ fontWeight: "400" }}>
-              Estoy de acuerdo con lo establecido y con{" "}
-              <Link href="/terms-and-conditions">Términos y condiciones</Link>
+              Estoy de acuerdo con lo establecido y con términos y condiciones
             </label>
           </Field>
         </Box>
@@ -354,25 +401,12 @@ const Index = () => {
           loading={loading}
           variant="contained"
           fullWidth={true}
+          disabled={!user?.active_account}
         >
-          <span>Registrar</span>
+          <span>Actualizar</span>
         </LoadingButton>
-        <Link href="/login">
-          <Button
-            fullWidth={true}
-            variant="text"
-            sx={{
-              marginTop: "10px",
-              fontFamily: "Prompt",
-              boxShadow: "none",
-              marginRight: "10px",
-              padding: "6px 30px",
-            }}
-          >
-            Ya tengo cuenta
-          </Button>
-        </Link>
       </form>
+      <Toaster position="bottom-right" />
     </Box>
   );
 };

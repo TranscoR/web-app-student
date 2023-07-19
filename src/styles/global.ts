@@ -56,4 +56,29 @@ export default createGlobalStyle`
       border-top-left-radius: 7px !important;
       border-top-right-radius: 7px !important;
     }
+    .css-k0o85r-MuiInputBase-root-MuiOutlinedInput-root-MuiSelect-root {
+      border-radius: 6px !important;
+      background: #fff;
+    }
+    .css-jcfq8n-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+      padding: 14.5px !important;
+      background: #fff;
+      font-family: 'Prompt';
+      text-transform: capitalize;
+    }
+    .css-3glje2-MuiButtonBase-root-MuiMenuItem-root {
+      font-family: 'Prompt';
+      text-transform: capitalize;
+    }
+    .css-1egur5x-MuiPaper-root-MuiAccordion-root:first-of-type {
+      border-top-left-radius: 7px !important;
+      border-top-right-radius: 7px !important;
+    }
+    .css-1egur5x-MuiPaper-root-MuiAccordion-root:last-of-type {
+      border-bottom-left-radius: 7px !important;
+      border-bottom-right-radius: 7px !important;
+    }
+    .css-1egur5x-MuiPaper-root-MuiAccordion-root {
+      box-shadow: none !important;
+    }
 `;
