@@ -33,6 +33,9 @@ const SchoolCycle = styled.h2`
   & img {
     vertical-align: middle;
   }
+  @media screen and (max-width: 820px) {
+    font-size: 20.5px;
+  }
 `;
 
 const ContentIcon = styled(Box)`
@@ -112,33 +115,35 @@ const Index = () => {
                 </ContentIcon>
               </Box>
               <Box>
-                {!!Object.keys(cycleSelected).length && (
-                  <SchoolCycle>
-                    {/* @ts-ignore */}
-                    Ciclo escolar: {cycleSelected?.first_year} -{" "}
-                    {/* @ts-ignore */}
-                    {cycleSelected?.end_year}
-                  </SchoolCycle>
-                )}
+                {!!Object.keys(cycleSelected).length &&
+                  !!user?.school_cycle.length && (
+                    <SchoolCycle>
+                      {/* @ts-ignore */}
+                      Ciclo escolar: {cycleSelected?.first_year} -{" "}
+                      {/* @ts-ignore */}
+                      {cycleSelected?.end_year}
+                    </SchoolCycle>
+                  )}
                 <Student>{user?.student_name}</Student>
                 {!user?.active_account && <DisabledAccountBadge />}
               </Box>
             </Stack>
           </Box>
-          {!!Object.keys(cycleSelected).length && (
-            <Box>
-              <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
-                <Image
-                  width={15}
-                  height={15}
-                  priority
-                  src={IconCalendar}
-                  alt="icon-calendar"
-                />
-                Ciclo escolar
-              </ButtonFilters>
-            </Box>
-          )}
+          {!!Object.keys(cycleSelected).length &&
+            !!user?.school_cycle.length && (
+              <Box>
+                <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
+                  <Image
+                    width={15}
+                    height={15}
+                    priority
+                    src={IconCalendar}
+                    alt="icon-calendar"
+                  />
+                  Ciclo escolar
+                </ButtonFilters>
+              </Box>
+            )}
         </Stack>
         {showFilters && (
           <Animation>
