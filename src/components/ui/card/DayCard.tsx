@@ -58,13 +58,21 @@ interface DayCard {
   paid: boolean;
   paid_date: any;
   days: any;
+  amount: any;
   week_index: any;
   student: Student;
 }
 
-const Index = ({ label_day, label_date, paid, paid_date }: DayCard) => {
+const Index = ({
+  label_day,
+  label_date,
+  week_index,
+  paid,
+  paid_date,
+  amount,
+}: DayCard) => {
   return (
-    <Box>
+    <Box key={week_index}>
       <Day>{label_day}</Day>
       <Card paid={paid}>
         <Box>
@@ -75,14 +83,15 @@ const Index = ({ label_day, label_date, paid, paid_date }: DayCard) => {
           <Status paid={paid}>{paid ? "Pagado" : "Pendiente"}</Status>
           {paid && (
             <DatepPay>
-              <Image
+              {/* <Image
                 width={12}
                 height={12}
                 priority
                 src={IconCheck}
                 alt="icon-check"
               />
-              {renderDateFirebase(paid_date)}
+              {renderDateFirebase(paid_date)} */}
+              ${amount}
             </DatepPay>
           )}
         </Box>

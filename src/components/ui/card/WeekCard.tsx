@@ -96,7 +96,7 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
   const payments = days.filter((day) => day.paid);
 
   return (
-    <Box sx={{ border: "1ps solid #d1d1d185" }}>
+    <Box key={i} sx={{ border: "1ps solid #d1d1d185" }}>
       <CustomAccordion>
         <AccordionSummary
           expandIcon={
