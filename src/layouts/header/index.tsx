@@ -55,7 +55,7 @@ const Index = () => {
             variant="contained"
             sx={{ color: "#fff", fontFamily: "Prompt", boxShadow: "none" }}
           >
-            Perfil
+            Mi cuenta
           </Button>
         </Link>
       </Box>

@@ -1,3 +1,5 @@
+import { Main } from "@/templates/Main";
+import { Meta } from "@/layouts/Meta";
 import { Fragment, useState } from "react";
 import styled from "styled-components";
 import Header from "@/layouts/header";
@@ -98,134 +100,145 @@ const Index = () => {
     );
 
   return (
-    <Box>
-      <Header />
-      <Content>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={2}
-          justifyContent="space-between"
-        >
-          <Box>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <Box>
-                <ContentIcon>
-                  <Image
-                    width={25}
-                    height={25}
-                    priority
-                    src={IconUser}
-                    alt="icon-user"
-                  />
-                </ContentIcon>
-              </Box>
-              <Box>
-                {!!user?.school_cycle?.length && (
-                  <SchoolCycle>
-                    {/* @ts-ignore */}
-                    Ciclo escolar: {cycleSelected?.first_year} -{" "}
-                    {/* @ts-ignore */}
-                    {cycleSelected?.end_year}
-                  </SchoolCycle>
-                )}
-                <Student>{user?.student_name}</Student>
-                {!user?.active_account && <DisabledAccountBadge />}
-              </Box>
-            </Stack>
-          </Box>
-          {!!user?.school_cycle?.length && (
+    <Main
+      meta={
+        <Meta
+          title="TranscoR - Inicio"
+          description="lleva el control de los pagos de tu hijo"
+        />
+      }
+    >
+      <Box>
+        <Header />
+        <Content>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            justifyContent="space-between"
+          >
             <Box>
-              <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
-                <Image
-                  width={15}
-                  height={15}
-                  priority
-                  src={IconCalendar}
-                  alt="icon-calendar"
-                />
-                Ciclo escolar
-              </ButtonFilters>
+              <Stack direction="row" spacing={2} alignItems="center">
+                <Box>
+                  <ContentIcon>
+                    <Image
+                      width={25}
+                      height={25}
+                      priority
+                      src={IconUser}
+                      alt="icon-user"
+                    />
+                  </ContentIcon>
+                </Box>
+                <Box>
+                  {!!user?.school_cycle?.length && (
+                    <SchoolCycle>
+                      {/* @ts-ignore */}
+                      Ciclo escolar: {cycleSelected?.first_year} -{" "}
+                      {/* @ts-ignore */}
+                      {cycleSelected?.end_year}
+                    </SchoolCycle>
+                  )}
+                  <Student>{user?.student_name}</Student>
+                  {!user?.active_account && <DisabledAccountBadge />}
+                </Box>
+              </Stack>
             </Box>
-          )}
-        </Stack>
-        {showFilters && (
-          <Animation>
-            <Box mt={4}>
-              <small>Elige un ciclo escolar:</small>
-              <FilterOptions mb={4} mt={1}>
-                <Stack
-                  direction={{ xs: "row", sm: "row" }}
-                  spacing={2}
-                  alignItems="center"
-                >
-                  {user?.school_cycle?.map((cycle: any) => (
-                    <Button
-                      variant="contained"
-                      sx={{
-                        fontFamily: "Prompt",
-                        boxShadow: "none",
-                        padding: "8px 10px",
-                        color:
-                          //@ts-ignore
-                          cycleSelected?.first_year === cycle.first_year
-                            ? "#f1ca3b"
-                            : "#1d1d1d",
-                        backgroundColor:
-                          //@ts-ignore
-                          cycleSelected?.first_year === cycle.first_year
-                            ? "#f1ca3b20"
-                            : "#e9edf3",
-                      }}
-                      onClick={() =>
-                        setCycleSelected({
-                          first_year: cycle.first_year,
-                          end_year: cycle.end_year,
-                        })
-                      }
-                    >
-                      {cycle.first_year} - {cycle.end_year}
-                    </Button>
-                  ))}
-                </Stack>
-              </FilterOptions>
-            </Box>
-          </Animation>
-        )}
-        {cyclesFiltered && cyclesFiltered.length && cyclesFiltered[0].weeks ? (
-          <Box>
-            <Table thead={thead} />
-            {cyclesFiltered &&
-              cyclesFiltered.length &&
-              cyclesFiltered[0].weeks?.map((week: any, i: any) => (
-                <WeekCard {...week} i={i} />
-              ))}
-          </Box>
-        ) : (
-          <Fragment>
-            {!!user?.school_cycle?.length ? (
-              <Box mt={10} textAlign="center">
-                <p>Selecciona un ciclo escolar</p>
-              </Box>
-            ) : (
-              <Box mt={10} textAlign="center">
-                <Image
-                  width={200}
-                  height={200}
-                  priority
-                  src={IconAdminSchoolCycle}
-                  alt="icon-admin-school-cycle"
-                  style={{ marginBottom: "20px" }}
-                />
-                <p>
-                  Espere al administrador a que cree el nuevo ciclo escolar de
-                  este año
-                </p>
+            {!!user?.school_cycle?.length && (
+              <Box>
+                <ButtonFilters onClick={() => setShowFilters(!showFilters)}>
+                  <Image
+                    width={15}
+                    height={15}
+                    priority
+                    src={IconCalendar}
+                    alt="icon-calendar"
+                  />
+                  Ciclo escolar
+                </ButtonFilters>
               </Box>
             )}
-          </Fragment>
-        )}
-      </Content>
-    </Box>
+          </Stack>
+          {showFilters && (
+            <Animation>
+              <Box mt={4}>
+                <small>Elige un ciclo escolar:</small>
+                <FilterOptions mb={4} mt={1}>
+                  <Stack
+                    direction={{ xs: "row", sm: "row" }}
+                    spacing={2}
+                    alignItems="center"
+                  >
+                    {user?.school_cycle?.map((cycle: any) => (
+                      <Button
+                        variant="contained"
+                        sx={{
+                          fontFamily: "Prompt",
+                          boxShadow: "none",
+                          padding: "8px 10px",
+                          color:
+                            //@ts-ignore
+                            cycleSelected?.first_year === cycle.first_year
+                              ? "#f1ca3b"
+                              : "#1d1d1d",
+                          backgroundColor:
+                            //@ts-ignore
+                            cycleSelected?.first_year === cycle.first_year
+                              ? "#f1ca3b20"
+                              : "#e9edf3",
+                        }}
+                        onClick={() =>
+                          setCycleSelected({
+                            first_year: cycle.first_year,
+                            end_year: cycle.end_year,
+                          })
+                        }
+                      >
+                        {cycle.first_year} - {cycle.end_year}
+                      </Button>
+                    ))}
+                  </Stack>
+                </FilterOptions>
+              </Box>
+            </Animation>
+          )}
+          {cyclesFiltered &&
+          cyclesFiltered.length &&
+          cyclesFiltered[0].weeks ? (
+            <Box>
+              <Table thead={thead} />
+              {cyclesFiltered &&
+                cyclesFiltered.length &&
+                cyclesFiltered[0].weeks?.map((week: any, i: any) => (
+                  <WeekCard {...week} i={i} />
+                ))}
+            </Box>
+          ) : (
+            <Fragment>
+              {!!user?.school_cycle?.length ? (
+                <Box mt={10} textAlign="center">
+                  <p>Selecciona un ciclo escolar</p>
+                </Box>
+              ) : (
+                <Box mt={10} textAlign="center">
+                  <Image
+                    width={200}
+                    height={200}
+                    priority
+                    src={IconAdminSchoolCycle}
+                    alt="icon-admin-school-cycle"
+                    style={{ marginBottom: "20px" }}
+                  />
+                  <p>
+                    Espere al administrador a que cree el nuevo ciclo escolar de
+                    este año
+                  </p>
+                </Box>
+              )}
+            </Fragment>
+          )}
+        </Content>
+      </Box>
+    </Main>
   );
 };
 

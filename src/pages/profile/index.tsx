@@ -1,3 +1,5 @@
+import { Main } from "@/templates/Main";
+import { Meta } from "@/layouts/Meta";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Header from "@/layouts/header";
@@ -64,61 +66,70 @@ const Index = () => {
   };
 
   return (
-    <Box>
-      <Header />
-      <Content>
-        <Stack
-          direction={{ xs: "column", sm: "row" }}
-          spacing={1}
-          mt={1}
-          justifyContent="space-between"
-        >
-          <Box>
-            <ButtonBack destination="/home" />
-            <Title>{user?.student_name}</Title>
-            <Email>
-              <Image
-                width={14}
-                height={14}
-                priority
-                src={IconEmail}
-                alt="icon-email"
-              />
-              {user?.email}
-            </Email>
-            {!user?.active_account && <DisabledAccountBadge />}
-          </Box>
-          <Box>
-            <Button
-              variant="text"
-              sx={{
-                fontFamily: "Prompt",
-                boxShadow: "none",
-                marginRight: "10px",
-                padding: "6px 30px",
-                color: "#1d1d1d",
-                background: "#f2f2f2",
-              }}
-              onClick={logOut}
-            >
-              <Image
-                width={14}
-                height={14}
-                priority
-                src={IconLogout}
-                alt="icon-logout"
-                style={{ marginRight: "5px" }}
-              />
-              Cerrar sesión
-            </Button>
-          </Box>
-        </Stack>
-        <Line />
-        <ContentFormUpdateProfile>
-          <UpdateProfile />
-        </ContentFormUpdateProfile>
-      </Content>
-    </Box>
+    <Main
+      meta={
+        <Meta
+          title="TranscoR - Mi Cuenta"
+          description="lleva el control de los pagos de tu hijo"
+        />
+      }
+    >
+      <Box>
+        <Header />
+        <Content>
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={1}
+            mt={1}
+            justifyContent="space-between"
+          >
+            <Box>
+              <ButtonBack destination="/home" />
+              <Title>{user?.student_name}</Title>
+              <Email>
+                <Image
+                  width={14}
+                  height={14}
+                  priority
+                  src={IconEmail}
+                  alt="icon-email"
+                />
+                {user?.email}
+              </Email>
+              {!user?.active_account && <DisabledAccountBadge />}
+            </Box>
+            <Box>
+              <Button
+                variant="text"
+                sx={{
+                  fontFamily: "Prompt",
+                  boxShadow: "none",
+                  marginRight: "10px",
+                  padding: "6px 30px",
+                  color: "#1d1d1d",
+                  background: "#f2f2f2",
+                }}
+                onClick={logOut}
+              >
+                <Image
+                  width={14}
+                  height={14}
+                  priority
+                  src={IconLogout}
+                  alt="icon-logout"
+                  style={{ marginRight: "5px" }}
+                />
+                Cerrar sesión
+              </Button>
+            </Box>
+          </Stack>
+          <Line />
+          <ContentFormUpdateProfile>
+            <UpdateProfile />
+          </ContentFormUpdateProfile>
+        </Content>
+      </Box>
+    </Main>
   );
 };
 

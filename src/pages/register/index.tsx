@@ -1,3 +1,5 @@
+import { Main } from "@/templates/Main";
+import { Meta } from "@/layouts/Meta";
 import styled from "styled-components";
 import Box from "@mui/material/Box";
 import RegisterForm from "@/components/RegisterForm";
@@ -59,27 +61,36 @@ const Logo = styled.h2`
 
 const Index = () => {
   return (
-    <Content>
-      <ContentLeft>
-        <div style={{ position: "sticky", top: "70px" }}>
-          <Logo>TranscoR</Logo>
-          <Title>
-            Bienvenidos al nuevo
-            <span>Cliclo Escolar</span>
-          </Title>
-          <SchoolYear>{currentSchoolCycle()}</SchoolYear>
-          <Description>
-            El servicio más seguro de transporte escolar para tu hijo, llevar el
-            control de tus pagos ahora es muy fácil
-          </Description>
-        </div>
-      </ContentLeft>
-      <Box>
-        <ContentRight>
-          <RegisterForm />
-        </ContentRight>
-      </Box>
-    </Content>
+    <Main
+      meta={
+        <Meta
+          title="TranscoR - Iniciar Registro"
+          description="lleva el control de los pagos de tu hijo"
+        />
+      }
+    >
+      <Content>
+        <ContentLeft>
+          <div style={{ position: "sticky", top: "70px" }}>
+            <Logo>TranscoR</Logo>
+            <Title>
+              Bienvenidos al nuevo
+              <span>Cliclo Escolar</span>
+            </Title>
+            <SchoolYear>{currentSchoolCycle()}</SchoolYear>
+            <Description>
+              El servicio más seguro de transporte escolar para tu hijo, llevar
+              el control de tus pagos ahora es muy fácil
+            </Description>
+          </div>
+        </ContentLeft>
+        <Box>
+          <ContentRight>
+            <RegisterForm />
+          </ContentRight>
+        </Box>
+      </Content>
+    </Main>
   );
 };
 
