@@ -78,7 +78,7 @@ const Index = () => {
             />
           </Field>
           <Field>
-            <label>Numero de lista</label>
+            <label>Número de lista</label>
             <Input
               type="number"
               register={register}
@@ -201,7 +201,7 @@ const Index = () => {
               />
             </Field>
             <Field>
-              <label>Group</label>
+              <label>Grupo</label>
               <Controller
                 name="turn"
                 control={control}

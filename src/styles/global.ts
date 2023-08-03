@@ -80,6 +80,10 @@ export default createGlobalStyle`
     .css-1egur5x-MuiPaper-root-MuiAccordion-root {
       box-shadow: none !important;
     }
+    .css-epa1mx {
+      border-radius: 6px !important;
+      background: #fff;
+    }
     .css-b7v0nw.css-b7v0nw.css-b7v0nw {
       font-family: 'Prompt';
       text-transform: capitalize;
