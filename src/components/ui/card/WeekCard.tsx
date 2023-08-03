@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Image from "next/image";
 import IconArrow from "@/assets/icons/chevron.svg";
+import IconVacations from "@/assets/icons/vacations.png";
 import PayWeekCard from "@/components/ui/card/PayWeekCard";
-import DayCard from "@/components/ui/card/DayCard";
-import { type Student } from "@/types";
 
 const HeaderInfo = styled(Box)`
   display: grid;
@@ -41,11 +39,17 @@ const HeaderInfo = styled(Box)`
   }
 `;
 
-const Legend = styled.span`
-  display: block;
-  margin: 15px 0;
-  font-weight: 400;
-  font-size: 13.5px;
+const VacationsTitle = styled.h4`
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 500;
+  text-align: center;
+  & img {
+    position: relative;
+    top: -2px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
 `;
 
 const CotentDays = styled(Box)`
@@ -95,7 +99,6 @@ interface WeekCard {
       paid: boolean;
     }
   ];
-  student: Student;
 }
 
 const Index = ({
@@ -108,9 +111,9 @@ const Index = ({
   vacations,
   days,
   collector_name,
-  student,
 }: WeekCard) => {
-  const payments = days.filter((day) => day.paid);
+  const number_week = i + 1;
+
   return (
     <Box key={i} sx={{ border: "1ps solid #d1d1d185" }}>
       <CustomAccordion>
@@ -128,24 +131,37 @@ const Index = ({
           id="week-accordion-header"
           sx={{ padding: "0 20px !important" }}
         >
-          <HeaderInfo>
-            <div>
-              <p>#{i + 1}</p>
-            </div>
-            <div>
-              <p>
-                {start_week} - {end_week}
-              </p>
-            </div>
-            <div>
-              <Paid paid={paid}>{!paid ? "Incompleto" : "Completado"} </Paid>
-            </div>
-          </HeaderInfo>
+          {vacations ? (
+            <VacationsTitle>
+              <Image
+                width={17}
+                height={17}
+                priority
+                src={IconVacations}
+                alt="icon-vacations"
+              />
+              Vacaciones
+            </VacationsTitle>
+          ) : (
+            <HeaderInfo>
+              <div>
+                <p>#{i + 1}</p>
+              </div>
+              <div>
+                <p>
+                  {start_week} - {end_week}
+                </p>
+              </div>
+              <div>
+                <Paid paid={paid}>{!paid ? "Incompleto" : "Completado"} </Paid>
+              </div>
+            </HeaderInfo>
+          )}
         </AccordionSummary>
         <AccordionDetails>
           <Box sx={{ borderTop: "1px solid #7c7c7c26", paddingTop: "30px" }}>
             <Box>
-              <h3>Semana 1</h3>
+              <h3>Semana {number_week}</h3>
               <p>
                 {start_week} - {end_week}
               </p>
