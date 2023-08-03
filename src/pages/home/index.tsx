@@ -83,14 +83,10 @@ const Index = () => {
   const date = new Date();
   const current_year = date.getFullYear();
 
-  const current_school_cycle = {
+  const [cycleSelected, setCycleSelected] = useState<cycleSelected | {}>({
     first_year: JSON.stringify(current_year),
     end_year: JSON.stringify(current_year + 1),
-  };
-
-  const [cycleSelected, setCycleSelected] = useState<cycleSelected | {}>(
-    current_school_cycle || {}
-  );
+  });
 
   const cyclesFiltered =
     Object.keys(cycleSelected).length &&
@@ -201,10 +197,9 @@ const Index = () => {
               </Box>
             </Animation>
           )}
-          {cyclesFiltered &&
-          cyclesFiltered.length &&
-          cyclesFiltered[0].weeks ? (
+          {cyclesFiltered && cyclesFiltered.length ? (
             <Box>
+              {console.log("cyclesFiltered", cyclesFiltered)}
               <Table thead={thead} />
               {cyclesFiltered &&
                 cyclesFiltered.length &&

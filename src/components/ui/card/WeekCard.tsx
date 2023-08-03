@@ -6,6 +6,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Image from "next/image";
 import IconArrow from "@/assets/icons/chevron.svg";
+import PayWeekCard from "@/components/ui/card/PayWeekCard";
 import DayCard from "@/components/ui/card/DayCard";
 import { type Student } from "@/types";
 
@@ -81,6 +82,11 @@ interface WeekCard {
   i: number;
   start_week: string;
   end_week: string;
+  paid: boolean;
+  transfer_payment: boolean;
+  amount: number;
+  vacations: boolean;
+  collector_name: string;
   days: [
     {
       day: number;
@@ -92,9 +98,19 @@ interface WeekCard {
   student: Student;
 }
 
-const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
+const Index = ({
+  i,
+  start_week,
+  end_week,
+  paid,
+  transfer_payment,
+  amount,
+  vacations,
+  days,
+  collector_name,
+  student,
+}: WeekCard) => {
   const payments = days.filter((day) => day.paid);
-
   return (
     <Box key={i} sx={{ border: "1ps solid #d1d1d185" }}>
       <CustomAccordion>
@@ -122,12 +138,7 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
               </p>
             </div>
             <div>
-              <Paid paid={payments.length === 5 ?? true}>
-                {payments.length !== 5 ? "Incompleto" : "Completado"}{" "}
-                <small>
-                  ({payments.length} de {days.length})
-                </small>
-              </Paid>
+              <Paid paid={paid}>{!paid ? "Incompleto" : "Completado"} </Paid>
             </div>
           </HeaderInfo>
         </AccordionSummary>
@@ -138,12 +149,12 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
               <p>
                 {start_week} - {end_week}
               </p>
-              <Legend>
+              {/* <Legend>
                 Despliegue de días pagados y días con pago pendiente
-              </Legend>
+              </Legend> */}
             </Box>
             <CotentDays mt={4} mb={1}>
-              <Stack direction={{ xs: "row", sm: "row" }} spacing={2}>
+              {/* <Stack direction={{ xs: "row", sm: "row" }} spacing={2}>
                 {days.map((day: any) => (
                   <DayCard
                     {...day}
@@ -152,11 +163,20 @@ const Index = ({ i, start_week, end_week, days, student }: WeekCard) => {
                     week_index={i}
                   />
                 ))}
-              </Stack>
+              </Stack> */}
+              <PayWeekCard
+                amount={amount}
+                paid={paid}
+                transfer_payment={transfer_payment}
+                vacations={vacations}
+                week_index={i}
+                collector_name={collector_name}
+                // cycleSelected={cycleSelected}
+              />
             </CotentDays>
-            <small>
+            {/* <small>
               {payments.length} pagos realizados de {days.length}
-            </small>
+            </small> */}
           </Box>
         </AccordionDetails>
       </CustomAccordion>

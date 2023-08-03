@@ -11,11 +11,22 @@ import Checkbox from "@mui/material/Checkbox";
 import LoadingButton from "@mui/lab/LoadingButton";
 import { creatAccount } from "@/api/auth";
 import { Field } from "@/styles";
+import { GROUP_NAMES, TURNS } from "@/mocks/school";
 import { Typography, FormControl, MenuItem, Select } from "@mui/material";
 
 const Title = styled.h1`
   font-size: 30px;
   margin-bottom: 20px;
+`;
+
+const Grid = styled(Box)`
+  display: grid;
+  grid-template-columns: 77% 20%;
+  grid-template-rows: 1fr;
+  grid-column-gap: 16px;
+  @media screen and (max-width: 820px) {
+    grid-template-columns: 100%;
+  }
 `;
 
 const Index = () => {
@@ -54,17 +65,30 @@ const Index = () => {
     <Box>
       <Title>Formulario de Registro</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Field>
-          <label>Nombre del Alumno</label>
-          <Input
-            type="text"
-            register={register}
-            errors={errors}
-            keyName="student_name"
-            placeholder="Escribe el nombre del alumno"
-            required={true}
-          />
-        </Field>
+        <Grid>
+          <Field>
+            <label>Nombre del Alumno</label>
+            <Input
+              type="text"
+              register={register}
+              errors={errors}
+              keyName="student_name"
+              placeholder="Escribe el nombre del alumno"
+              required={true}
+            />
+          </Field>
+          <Field>
+            <label>Numero de lista</label>
+            <Input
+              type="number"
+              register={register}
+              errors={errors}
+              keyName="list_number"
+              placeholder="0"
+              required={true}
+            />
+          </Field>
+        </Grid>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
             <Field sx={{ margin: "0px !important" }}>
@@ -177,6 +201,54 @@ const Index = () => {
               />
             </Field>
             <Field>
+              <label>Group</label>
+              <Controller
+                name="turn"
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <Box>
+                    <FormControl fullWidth>
+                      <Select
+                        id="mui-component-select-turn"
+                        variant="outlined"
+                        {...field}
+                      >
+                        {GROUP_NAMES.map((reason: any, k: any) => (
+                          <MenuItem key={k} value={reason}>
+                            {reason}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                      {errors.turn && (
+                        <Typography
+                          variant="caption"
+                          sx={{ fontFamily: "Prompt" }}
+                        >
+                          * Este campo es requerido
+                        </Typography>
+                      )}
+                    </FormControl>
+                  </Box>
+                )}
+              />
+            </Field>
+          </Stack>
+        </Box>
+        <Box mt={2}>
+          <Stack direction="row" spacing={2}>
+            <Field sx={{ margin: "0px !important" }}>
+              <label>Nombre del profesor</label>
+              <Input
+                type="text"
+                register={register}
+                errors={errors}
+                keyName="teacher_name"
+                placeholder="Escribe el nombre del alumno"
+                required={true}
+              />
+            </Field>
+            <Field>
               <label>Turno</label>
               <Controller
                 name="turn"
@@ -190,13 +262,11 @@ const Index = () => {
                         variant="outlined"
                         {...field}
                       >
-                        {["matutino", "vespertino"].map(
-                          (reason: any, k: any) => (
-                            <MenuItem key={k} value={reason}>
-                              {reason}
-                            </MenuItem>
-                          )
-                        )}
+                        {TURNS.map((reason: any, k: any) => (
+                          <MenuItem key={k} value={reason}>
+                            {reason}
+                          </MenuItem>
+                        ))}
                       </Select>
                       {errors.turn && (
                         <Typography

@@ -27,7 +27,7 @@ const Index = () => {
     <Main
       meta={
         <Meta
-          title="TranscoR - Iniciar sesión"
+          title="TranscoR Student - Iniciar sesión"
           description="lleva el control de los pagos de tu hijo"
         />
       }

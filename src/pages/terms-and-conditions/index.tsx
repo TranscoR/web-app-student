@@ -64,14 +64,6 @@ const Index = () => {
           <Subtitle>Alumnos</Subtitle>
           <Box mt={2}>
             <Text>
-              - Al alumno se le tomará la temperatura al subir y al bajar
-            </Text>
-          </Box>
-          <Box mt={2}>
-            <Text>- Las unidades se sanitizan diario</Text>
-          </Box>
-          <Box mt={2}>
-            <Text>
               - El servicio de transporte escolar consta de trasladar al alumno
               de su domicilio o punto de reunion, que se le asigne al colegio y
               viceversa
