@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { useRouter } from "next/router";
-import styled from "styled-components";
-import Link from "next/link";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import Input from "@/components/ui/form/Input";
-import Checkbox from "@mui/material/Checkbox";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { creatAccount } from "@/api/auth";
-import { Field } from "@/styles";
-import { GROUP_NAMES, TURNS } from "@/mocks/school";
-import { Typography, FormControl, MenuItem, Select } from "@mui/material";
+import { useState } from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import Link from 'next/link';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Input from '@/components/ui/form/Input';
+import Checkbox from '@mui/material/Checkbox';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { creatAccount } from '@/api/auth';
+import { Field } from '@/styles';
+import { GROUP_NAMES, TURNS } from '@/mocks/school';
+import { Typography, FormControl, MenuItem, Select } from '@mui/material';
 
 const Title = styled.h1`
   font-size: 30px;
@@ -48,7 +48,7 @@ const Index = () => {
       .then(() => {
         setLoading(false);
         // setUserInfo(info);
-        router.push("/home");
+        router.push('/home');
       })
       .catch((error) => {
         setLoading(false);
@@ -57,9 +57,9 @@ const Index = () => {
 
   // @ts-ignore
   const gradeOptions =
-    watch("education") === "primaria"
-      ? ["primero", "segundo", "tercero", "cuarto", "quinto", "sexto"]
-      : ["primero", "segundo", "tercero"];
+    watch('education') === 'primaria'
+      ? ['primero', 'segundo', 'tercero', 'cuarto', 'quinto', 'sexto']
+      : ['primero', 'segundo', 'tercero'];
 
   return (
     <Box>
@@ -91,7 +91,7 @@ const Index = () => {
         </Grid>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
+            <Field sx={{ margin: '0px !important' }}>
               <label>Correo electrónico</label>
               <Input
                 type="email"
@@ -117,7 +117,7 @@ const Index = () => {
         </Box>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
+            <Field sx={{ margin: '0px !important' }}>
               <label>Nombre de la escuela</label>
               <Input
                 type="text"
@@ -142,7 +142,7 @@ const Index = () => {
                         variant="outlined"
                         {...field}
                       >
-                        {["primaria", "secundaria"].map(
+                        {['primaria', 'secundaria'].map(
                           (reason: any, k: any) => (
                             <MenuItem key={k} value={reason}>
                               {reason}
@@ -153,7 +153,7 @@ const Index = () => {
                       {errors.education && (
                         <Typography
                           variant="caption"
-                          sx={{ fontFamily: "Prompt" }}
+                          sx={{ fontFamily: 'Prompt' }}
                         >
                           * Este campo es requerido
                         </Typography>
@@ -167,7 +167,7 @@ const Index = () => {
         </Box>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
+            <Field sx={{ margin: '0px !important' }}>
               <label>Grado</label>
               <Controller
                 name="grade"
@@ -190,7 +190,7 @@ const Index = () => {
                       {errors.grade && (
                         <Typography
                           variant="caption"
-                          sx={{ fontFamily: "Prompt" }}
+                          sx={{ fontFamily: 'Prompt' }}
                         >
                           * Este campo es requerido
                         </Typography>
@@ -223,7 +223,7 @@ const Index = () => {
                       {errors.turn && (
                         <Typography
                           variant="caption"
-                          sx={{ fontFamily: "Prompt" }}
+                          sx={{ fontFamily: 'Prompt' }}
                         >
                           * Este campo es requerido
                         </Typography>
@@ -237,7 +237,7 @@ const Index = () => {
         </Box>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
+            <Field sx={{ margin: '0px !important' }}>
               <label>Nombre del profesor</label>
               <Input
                 type="text"
@@ -271,7 +271,7 @@ const Index = () => {
                       {errors.turn && (
                         <Typography
                           variant="caption"
-                          sx={{ fontFamily: "Prompt" }}
+                          sx={{ fontFamily: 'Prompt' }}
                         >
                           * Este campo es requerido
                         </Typography>
@@ -296,15 +296,17 @@ const Index = () => {
         </Field>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
-              <label>Teléfono de casa</label>
+            <Field sx={{ margin: '0px !important' }}>
+              <label>
+                Teléfono de casa <small>(Opcional)</small>
+              </label>
               <Input
                 type="number"
                 register={register}
                 errors={errors}
                 keyName="house_phone_number"
                 placeholder="Escribe un teléfono"
-                required={true}
+                required={false}
               />
             </Field>
             <Field>
@@ -322,7 +324,7 @@ const Index = () => {
         </Box>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
+            <Field sx={{ margin: '0px !important' }}>
               <label>Nombre de otro familiar</label>
               <Input
                 type="text"
@@ -334,20 +336,22 @@ const Index = () => {
               />
             </Field>
             <Field>
-              <label>Numero de celular</label>
+              <label>
+                Numero de celular <small>(Opcional)</small>
+              </label>
               <Input
                 type="number"
                 register={register}
                 errors={errors}
                 keyName="subtutor_phone_number"
                 placeholder="Escribe un teléfono"
-                required={true}
+                required={false}
               />
             </Field>
           </Stack>
         </Box>
         <Field>
-          <label>Dirección</label>
+          <label>Dirección Completa</label>
           <Input
             type="text"
             register={register}
@@ -358,7 +362,7 @@ const Index = () => {
           />
         </Field>
         <Stack direction="row" spacing={2}>
-          <Field sx={{ margin: "0px !important" }}>
+          <Field sx={{ margin: '0px !important' }}>
             <label>Entre que calle</label>
             <Input
               type="text"
@@ -383,7 +387,7 @@ const Index = () => {
         </Stack>
         <Box mt={2}>
           <Stack direction="row" spacing={2}>
-            <Field sx={{ margin: "0px !important" }}>
+            <Field sx={{ margin: '0px !important' }}>
               <label>Color de casa</label>
               <Input
                 type="text"
@@ -414,8 +418,8 @@ const Index = () => {
                 <Checkbox checked={true} />
               </Box>
               <Box>
-                <label style={{ fontWeight: "400" }}>
-                  Estoy de acuerdo con lo establecido y con{" "}
+                <label style={{ fontWeight: '400' }}>
+                  Estoy de acuerdo con lo establecido y con{' '}
                   <Link href="/terms-and-conditions">
                     Términos y condiciones
                   </Link>
@@ -425,7 +429,7 @@ const Index = () => {
           </Field>
         </Box>
         <LoadingButton
-          sx={{ margin: "20px 0 0px", color: "#fff", boxShadow: "none" }}
+          sx={{ margin: '20px 0 0px', color: '#fff', boxShadow: 'none' }}
           size="medium"
           color="primary"
           type="submit"
@@ -440,11 +444,11 @@ const Index = () => {
             fullWidth={true}
             variant="text"
             sx={{
-              marginTop: "10px",
-              fontFamily: "Prompt",
-              boxShadow: "none",
-              marginRight: "10px",
-              padding: "6px 30px",
+              marginTop: '10px',
+              fontFamily: 'Prompt',
+              boxShadow: 'none',
+              marginRight: '10px',
+              padding: '6px 30px',
             }}
           >
             Ya tengo cuenta

@@ -2,9 +2,9 @@
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { db, auth } from "../../firebase";
-import { type Student } from "@/types";
+} from 'firebase/auth';
+import { db, auth } from '../../firebase';
+import { type Student } from '@/types';
 
 export const creatAccount = (data: Student) => {
   const { email, password } = data;
@@ -22,11 +22,11 @@ export const creatAccount = (data: Student) => {
           ...data,
         };
         // Save the information
-        db.collection("students")
+        db.collection('students')
           .doc(`${user.uid}`)
           .set(userInfo)
           .then(() => {
-            localStorage.setItem("user_uid", user.uid);
+            localStorage.setItem('student_id', user.uid);
             resolve(userInfo);
           })
           .catch((error) => reject(error));
@@ -46,8 +46,8 @@ export const sigIn = (data: signIn) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        localStorage.setItem("user_uid", user.uid);
-        db.collection("workers")
+        localStorage.setItem('student_id', user.uid);
+        db.collection('workers')
           .doc(user.uid)
           .get()
           .then((response: any) => {

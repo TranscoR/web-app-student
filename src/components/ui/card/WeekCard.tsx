@@ -1,12 +1,12 @@
-import styled from "styled-components";
-import Box from "@mui/material/Box";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Image from "next/image";
-import IconArrow from "@/assets/icons/chevron.svg";
-import IconVacations from "@/assets/icons/vacations.png";
-import PayWeekCard from "@/components/ui/card/PayWeekCard";
+import styled from 'styled-components';
+import Box from '@mui/material/Box';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Image from 'next/image';
+import IconArrow from '@/assets/icons/chevron.svg';
+import IconVacations from '@/assets/icons/vacations.png';
+import PayWeekCard from '@/components/ui/card/PayWeekCard';
 
 const HeaderInfo = styled(Box)`
   display: grid;
@@ -18,7 +18,7 @@ const HeaderInfo = styled(Box)`
   width: 100%;
   padding: 10px 0;
   & div p {
-    font-family: "Prompt";
+    font-family: 'Prompt';
     font-size: 15px;
     line-height: 120%;
     padding: 0 27px 0 0;
@@ -61,14 +61,14 @@ const CotentDays = styled(Box)`
 
 const CustomAccordion = styled(Accordion)(({ theme }) => {
   return {
-    borderRadius: "7px !important",
-    margin: "12px 0 !important",
-    boxShadow: "none",
-    border: "1px solid #d1d1d185",
-    ".MuiAccordionDetails-root": {},
-    ".MuiAccordionSummary-root": {
-      "& .Mui-expanded": {
-        margin: "0px !important",
+    borderRadius: '7px !important',
+    margin: '12px 0 !important',
+    boxShadow: 'none',
+    border: '1px solid #d1d1d185',
+    '.MuiAccordionDetails-root': {},
+    '.MuiAccordionSummary-root': {
+      '& .Mui-expanded': {
+        margin: '0px !important',
       },
     },
   };
@@ -79,7 +79,7 @@ interface Paid {
 }
 
 const Paid = styled.p<Paid>`
-  color: ${({ paid }) => (paid ? "#75D18F" : "#000")};
+  color: ${({ paid }) => (paid ? '#75D18F' : '#000')};
 `;
 
 interface WeekCard {
@@ -115,7 +115,7 @@ const Index = ({
   const number_week = i + 1;
 
   return (
-    <Box key={i} sx={{ border: "1ps solid #d1d1d185" }}>
+    <Box key={i} sx={{ border: '1ps solid #d1d1d185' }}>
       <CustomAccordion>
         <AccordionSummary
           expandIcon={
@@ -129,7 +129,7 @@ const Index = ({
           }
           aria-controls="week-accordion-content"
           id="week-accordion-header"
-          sx={{ padding: "0 20px !important" }}
+          sx={{ padding: '0 20px !important' }}
         >
           {vacations ? (
             <VacationsTitle>
@@ -153,13 +153,13 @@ const Index = ({
                 </p>
               </div>
               <div>
-                <Paid paid={paid}>{!paid ? "Incompleto" : "Completado"} </Paid>
+                <Paid paid={paid}>{!paid ? 'Pendiente' : 'Completado'} </Paid>
               </div>
             </HeaderInfo>
           )}
         </AccordionSummary>
         <AccordionDetails>
-          <Box sx={{ borderTop: "1px solid #7c7c7c26", paddingTop: "30px" }}>
+          <Box sx={{ borderTop: '1px solid #7c7c7c26', paddingTop: '30px' }}>
             <Box>
               <h3>Semana {number_week}</h3>
               <p>

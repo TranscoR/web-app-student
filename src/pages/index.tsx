@@ -1,17 +1,17 @@
-import router from "next/router";
-import { useEffect } from "react";
+import router from 'next/router';
+import { useEffect } from 'react';
 
 export default function Start() {
   useEffect(() => {
     // @ts-ignore
-    const user_uid =
-      typeof window !== "undefined" && localStorage?.getItem("user_uid");
+    const student_id =
+      typeof window !== 'undefined' && localStorage?.getItem('student_id');
 
-    if (user_uid === null) {
-      router.push("/login");
+    if (student_id === null) {
+      router.push('/login');
       return;
     } else {
-      router.push("/home");
+      router.push('/home');
     }
   });
   return <></>;

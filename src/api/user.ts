@@ -1,14 +1,14 @@
-import { db } from "../../firebase";
+import { db } from '../../firebase';
 
 export const getUserInfo = () => {
   // @ts-ignore
-  const user_uid =
-    typeof window !== "undefined" && localStorage?.getItem("user_uid");
+  const student_id =
+    typeof window !== 'undefined' && localStorage?.getItem('student_id');
 
   return new Promise((resolve, reject) => {
-    db.collection("students")
+    db.collection('students')
       // @ts-ignore
-      .doc(user_uid)
+      .doc(student_id)
       .get()
       .then((response: any) => {
         resolve(response?.data());
@@ -22,7 +22,7 @@ export const getUserInfo = () => {
 
 export const updateUserInfo = (uid: any, info: any) => {
   return new Promise((resolve, reject) => {
-    db.collection("students")
+    db.collection('students')
       .doc(uid)
       .update({
         ...info,
@@ -40,13 +40,13 @@ export const updateUserInfo = (uid: any, info: any) => {
 export const getSchoolCycle = () => {
   // @ts-ignore
   const uid =
-    typeof window !== "undefined" && localStorage?.getItem("user_uid");
+    typeof window !== 'undefined' && localStorage?.getItem('student_id');
 
   return new Promise((resolve, reject) => {
-    db.collection("students")
+    db.collection('students')
       // @ts-ignore
       .doc(uid)
-      .collection("school_cycle")
+      .collection('school_cycle')
       .get()
       .then((response: any) => {
         const docSnapshots = response.docs;
