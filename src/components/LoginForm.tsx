@@ -1,14 +1,14 @@
-import Link from "next/link";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
-import styled from "styled-components";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Input from "@/components/ui/form/Input";
-import LoadingButton from "@mui/lab/LoadingButton";
-import { Field } from "@/styles";
-import { sigIn } from "@/api/auth";
+import Link from 'next/link';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Input from '@/components/ui/form/Input';
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Field } from '@/styles';
+import { sigIn } from '@/api/auth';
 
 const Title = styled.h1`
   font-size: 30px;
@@ -18,6 +18,7 @@ const Title = styled.h1`
 const Logo = styled.h3`
   color: #c6c6c6;
   font-weight: 500;
+  font-size: 15px;
 `;
 
 const Index = () => {
@@ -36,7 +37,7 @@ const Index = () => {
     sigIn(dataForm)
       .then(() => {
         setLoading(false);
-        router.push("/home");
+        router.push('/home');
       })
       .catch((error) => {
         setLoading(false);
@@ -45,10 +46,10 @@ const Index = () => {
 
   return (
     <Box>
-      <Logo>TranscoR</Logo>
+      <Logo>TranscoR | Estudiante</Logo>
       <Title>Iniciar sesión</Title>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Field sx={{ margin: "0px !important" }}>
+        <Field sx={{ margin: '0px !important' }}>
           <label>Correo electrónico</label>
           <Input
             type="email"
@@ -71,7 +72,7 @@ const Index = () => {
           />
         </Field>
         <LoadingButton
-          sx={{ margin: "20px 0 0", color: "#fff", boxShadow: "none" }}
+          sx={{ margin: '20px 0 0', color: '#fff', boxShadow: 'none' }}
           size="medium"
           color="primary"
           type="submit"
@@ -86,11 +87,11 @@ const Index = () => {
             fullWidth={true}
             variant="text"
             sx={{
-              marginTop: "10px",
-              fontFamily: "Prompt",
-              boxShadow: "none",
-              marginRight: "10px",
-              padding: "6px 30px",
+              marginTop: '10px',
+              fontFamily: 'Prompt',
+              boxShadow: 'none',
+              marginRight: '10px',
+              padding: '6px 30px',
             }}
           >
             Crear cuenta

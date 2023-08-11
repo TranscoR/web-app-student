@@ -13,6 +13,7 @@ import { creatAccount } from '@/api/auth';
 import { Field } from '@/styles';
 import { GROUP_NAMES, TURNS } from '@/mocks/school';
 import { Typography, FormControl, MenuItem, Select } from '@mui/material';
+import * as Icon from 'react-feather';
 
 const Title = styled.h1`
   font-size: 30px;
@@ -406,6 +407,43 @@ const Index = () => {
                 errors={errors}
                 keyName="door_color"
                 placeholder="Escribe un color"
+                required={true}
+              />
+            </Field>
+          </Stack>
+        </Box>
+        <Box mt={2}>
+          <Stack direction="row" spacing={2}>
+            <Field sx={{ margin: '0px !important' }}>
+              <label>Inscripción</label>
+              <Input
+                type="text"
+                register={register}
+                errors={errors}
+                keyName="inscription"
+                required={true}
+                endAdornment={<Icon.DollarSign size={15} />}
+              />
+            </Field>
+            <Field>
+              <label>Costo Semanal</label>
+              <Input
+                type="text"
+                register={register}
+                errors={errors}
+                keyName="weekly_cost"
+                required={true}
+                endAdornment={<Icon.DollarSign size={15} />}
+              />
+            </Field>
+            <Field>
+              <label>Vacaciones</label>
+              <Input
+                type="text"
+                register={register}
+                errors={errors}
+                keyName="vacation"
+                placeholder="Num Semanas"
                 required={true}
               />
             </Field>

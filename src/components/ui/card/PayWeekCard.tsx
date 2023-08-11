@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import styled from "styled-components";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import Image from "next/image";
-import IconDollar from "@/assets/icons/dollar-sign.svg";
-import IconTransfer from "@/assets/icons/transfer.svg";
-import IconAlert from "@/assets/icons/alert-circle.svg";
-import { COLORS } from "@/constants/colors";
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import styled from 'styled-components';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Image from 'next/image';
+import IconDollar from '@/assets/icons/dollar-sign.svg';
+import IconTransfer from '@/assets/icons/transfer.svg';
+import IconAlert from '@/assets/icons/alert-circle.svg';
+import { COLORS } from '@/constants/colors';
 
 interface Paid {
   paid: boolean;
@@ -16,10 +16,13 @@ interface Paid {
 
 const Card = styled(Box)<Paid>`
   width: 420px;
-  background-color: ${({ paid }) => (paid ? "#f1ca3b2a" : "#cccccc2e")};
-  border: ${({ paid }) => (paid ? "1px solid #f1c93b" : "1px solid #ccc")};
+  background-color: ${({ paid }) => (paid ? '#f1ca3b2a' : '#cccccc2e')};
+  border: ${({ paid }) => (paid ? '1px solid #f1c93b' : '1px solid #ccc')};
   padding: 20px;
   border-radius: 12px;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Title = styled.h4`
@@ -79,12 +82,12 @@ const Index = ({
                     alt="icon-alert"
                   />
                 )}
-                Pago{" "}
+                Pago{' '}
                 {paid
-                  ? "completado"
+                  ? 'completado'
                   : vacations
-                  ? "de vacaciones pendiente"
-                  : "semanal pendiente"}
+                  ? 'de vacaciones pendiente'
+                  : 'semanal pendiente'}
               </Title>
               {paid && (
                 <Box>
@@ -97,8 +100,8 @@ const Index = ({
                       alt="icon-dollar"
                     />
                     <small>
-                      Pago realizado con{" "}
-                      {transfer_payment ? "transferencia" : "efectivo"}
+                      Pago realizado con{' '}
+                      {transfer_payment ? 'transferencia' : 'efectivo'}
                     </small>
                   </Legend>
                   <Box>

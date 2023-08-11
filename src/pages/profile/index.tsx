@@ -2,6 +2,7 @@ import { Main } from '@/templates/Main';
 import { Meta } from '@/layouts/Meta';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
+import Chip from '@mui/material/Chip';
 import Header from '@/layouts/header';
 import Stack from '@mui/material/Stack';
 import UpdateProfile from '@/components/UpdateProfile';
@@ -51,6 +52,14 @@ const ContentFormUpdateProfile = styled(Box)`
   }
 `;
 
+const ContentPayments = styled(Box)`
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    padding: 10px 0 20px;
+    overflow: scroll;
+  }
+`;
+
 const Index = () => {
   const router = useRouter();
 
@@ -97,6 +106,23 @@ const Index = () => {
                 {user?.email}
               </Email>
               {!user?.active_account && <DisabledAccountBadge />}
+              <ContentPayments>
+                <Stack direction="row" spacing={1} mt={2}>
+                  <Chip
+                    label={`Inscripción: $${user?.inscription}`}
+                    variant="outlined"
+                  />
+                  <Chip
+                    label={`Pago Semanal: $${user?.weekly_cost}`}
+                    variant="outlined"
+                  />
+                  <Chip
+                    label={`Vacaciones: ${user?.vacation} Semanas`}
+                    variant="outlined"
+                  />
+                  {/* <Chip label="Clickable" variant="outlined" onClick={handleClick} /> */}
+                </Stack>
+              </ContentPayments>
             </Box>
             <Box>
               <Button

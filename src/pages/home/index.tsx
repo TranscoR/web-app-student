@@ -1,20 +1,20 @@
-import { Main } from "@/templates/Main";
-import { Meta } from "@/layouts/Meta";
-import { Fragment, useState } from "react";
-import styled from "styled-components";
-import Header from "@/layouts/header";
-import Stack from "@mui/material/Stack";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Animation from "@/components/animation/Animation";
-import Image from "next/image";
-import IconCalendar from "@/assets/icons/calendar.svg";
-import IconUser from "@/assets/icons/user.svg";
-import IconAdminSchoolCycle from "@/assets/icons/admin-school-cycle.svg";
-import Table from "@/components/ui/table";
-import DisabledAccountBadge from "@/components/DisabledAccountBadge";
-import WeekCard from "@/components/ui/card/WeekCard";
-import { useUserStore } from "@/store";
+import { Main } from '@/templates/Main';
+import { Meta } from '@/layouts/Meta';
+import { Fragment, useState } from 'react';
+import styled from 'styled-components';
+import Header from '@/layouts/header';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Animation from '@/components/animation/Animation';
+import Image from 'next/image';
+import IconCalendar from '@/assets/icons/calendar.svg';
+import IconUser from '@/assets/icons/user.svg';
+import IconAdminSchoolCycle from '@/assets/icons/admin-school-cycle.svg';
+import Table from '@/components/ui/table';
+import DisabledAccountBadge from '@/components/DisabledAccountBadge';
+import WeekCard from '@/components/ui/card/WeekCard';
+import { useUserStore } from '@/store';
 
 const Content = styled(Box)`
   margin: 60px auto;
@@ -72,7 +72,7 @@ interface cycleSelected {
 }
 
 const Index = () => {
-  const thead = ["Num Semana", "Semana", "Pago", ""];
+  const thead = ['Num Semana', 'Semana', 'Pago', ''];
 
   // @ts-ignore
   const user = useUserStore((state) => state.user);
@@ -108,7 +108,7 @@ const Index = () => {
         <Header />
         <Content>
           <Stack
-            direction={{ xs: "column", sm: "row" }}
+            direction={{ xs: 'column', sm: 'row' }}
             spacing={2}
             justifyContent="space-between"
           >
@@ -129,7 +129,7 @@ const Index = () => {
                   {!!user?.school_cycle?.length && (
                     <SchoolCycle>
                       {/* @ts-ignore */}
-                      Ciclo escolar: {cycleSelected?.first_year} -{" "}
+                      Ciclo escolar: {cycleSelected?.first_year} -{' '}
                       {/* @ts-ignore */}
                       {cycleSelected?.end_year}
                     </SchoolCycle>
@@ -160,7 +160,7 @@ const Index = () => {
                 <small>Elige un ciclo escolar:</small>
                 <FilterOptions mb={4} mt={1}>
                   <Stack
-                    direction={{ xs: "row", sm: "row" }}
+                    direction={{ xs: 'row', sm: 'row' }}
                     spacing={2}
                     alignItems="center"
                   >
@@ -168,19 +168,19 @@ const Index = () => {
                       <Button
                         variant="contained"
                         sx={{
-                          fontFamily: "Prompt",
-                          boxShadow: "none",
-                          padding: "8px 10px",
+                          fontFamily: 'Prompt',
+                          boxShadow: 'none',
+                          padding: '8px 10px',
                           color:
                             //@ts-ignore
                             cycleSelected?.first_year === cycle.first_year
-                              ? "#f1ca3b"
-                              : "#1d1d1d",
+                              ? '#f1ca3b'
+                              : '#1d1d1d',
                           backgroundColor:
                             //@ts-ignore
                             cycleSelected?.first_year === cycle.first_year
-                              ? "#f1ca3b20"
-                              : "#e9edf3",
+                              ? '#f1ca3b20'
+                              : '#e9edf3',
                         }}
                         onClick={() =>
                           setCycleSelected({
@@ -199,7 +199,7 @@ const Index = () => {
           )}
           {cyclesFiltered && cyclesFiltered.length ? (
             <Box>
-              {console.log("cyclesFiltered", cyclesFiltered)}
+              {console.log('cyclesFiltered', cyclesFiltered)}
               <Table thead={thead} />
               {cyclesFiltered &&
                 cyclesFiltered.length &&
@@ -221,7 +221,7 @@ const Index = () => {
                     priority
                     src={IconAdminSchoolCycle}
                     alt="icon-admin-school-cycle"
-                    style={{ marginBottom: "20px" }}
+                    style={{ marginBottom: '20px' }}
                   />
                   <p>
                     Espere al administrador a que cree el nuevo ciclo escolar de
